@@ -7,6 +7,10 @@ function getCharacters() {
     .then(function(response) {
         console.log(response);
     })
+    .catch(error => {
+        console.log(error)
+        //send message to user in DOM
+    });
 }
 getCharacters();
 
