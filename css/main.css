@@ -1,0 +1,50 @@
+body {
+  background-color: #232323;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li a {
+  font-size: 18px;
+}
+
+ul li:hover {
+  cursor: pointer;
+  color: rgb(255, 230, 0);
+  border: rgb(255, 230, 0) solid 2px;
+}
+
+ul li {
+  margin-bottom: 5px;
+  border: #fff solid 2px;
+  padding: 10px;
+}
+
+@media screen and (max-width: 850px) {
+  ul li a {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  ul li a {
+    font-size: 24px;
+  }
+  h1 {
+    font-size: 52px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
