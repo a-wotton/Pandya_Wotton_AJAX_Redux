@@ -76,7 +76,7 @@
                         episodeImage.src = episodeImageUrl;
                         episodeImage.alt = movie.episode_id + " episode image";
 
-                        episodeImage.addEventListener("click", () => {
+                        episodeImage.addEventListener("click", function() {
                             displayMovieDescription(movie);
                         });
 
