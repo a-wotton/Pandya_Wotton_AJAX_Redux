@@ -9,12 +9,20 @@
 </head>
 <body>
     <div class="grid-con">
-    <section id="character-con" class="col-span-2 m-col-span-2 l-col-span-4">
-        <h1>Characters:</h1>
-        <img id="spinner" src="images/spinner.svg" alt="Loading circle">
-    </section>
+        <section id="character-con" class="col-span-2 m-col-span-2 l-col-span-4">
+            <h1 id="myText"> Star Wars Characters:</h1>
+      
+            <img id="spinner" src="images/spinner.svg" alt="Loading circle">
+        </section>
+        <div  class="character-details-container movie-details col-span-2 m-col-span-2 l-col-start-5  l-col-end-12">
+            <br>
+            <h1 id="myText"> Movie Details </h1>
+            <div  id="character-details"></div>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/GSAPGlowPlugin.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
