@@ -42,8 +42,20 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(0, 0, 0, 0.8);
   }
   
-
-
+  .myText {
+    font-size: 36px;
+    animation: glow 10s infinite alternate; 
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px white;
+    }
+    to {
+      text-shadow: 0 0 30px white;
+    }
+  }
+  
 .hidden {
     display: none;
 }
