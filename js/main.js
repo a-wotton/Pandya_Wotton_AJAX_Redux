@@ -1,4 +1,5 @@
 (() => {
+    gsap.registerPlugin(SplitText, ScrambleTextPlugin);
     const baseUrl = `https://swapi.dev/api/`;
     const characters = [];
     const characterList = document.querySelector("#character-con");
@@ -52,8 +53,6 @@
         heightParagraph.textContent = `Height: ${character.height} cm`;
         characterInfoDiv.appendChild(heightParagraph);
 
-
-        
         characterDetailsContainer.innerHTML = "";
         characterDetailsContainer.appendChild(characterInfoDiv);
 
@@ -76,6 +75,11 @@
                         const episodeImage = document.createElement("img");
                         episodeImage.src = episodeImageUrl;
                         episodeImage.alt = movie.episode_id + " episode image";
+
+                        episodeImage.addEventListener("click", () => {
+                            displayMovieDescription(movie);
+                        });
+
                         movieDiv.appendChild(episodeImage);
 
                         moviesDiv.appendChild(movieDiv);
@@ -90,26 +94,50 @@
         characterDetailsContainer.appendChild(characterInfoDiv);
     }
 
-    getpage1();
+    // Split text and scramble animation for headers
+    const myTextHeaders = document.querySelectorAll(".myText");
 
-    const myText = document.querySelector("#myText");
-
-    const tl = gsap.timeline();
-    tl.from(myText, { opacity: 0, duration: 1 });
-
-    tl.to(myText, {
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.out",
-        textShadow: "0 0 30px white",
-        onStart: function () {
-            gsap.to(myText, { duration: 1, textShadow: "0 0 10px white", ease: "power2.out" });
-        },
-        onComplete: function () {
-            gsap.to(myText, { duration: 1, textShadow: "none", ease: "power2.out" });
-        },
+    myTextHeaders.forEach(header => {
+        animateText(header);
+        scrambleText(header);
     });
 
+    function scrambleText(element) {
+        gsap.to(element, {
+            duration: 3,
+            scrambleText: { text: element.textContent, chars: "lowercase", revealDelay: 0.09 },
+            ease: "power4.out"
+        });
+    }
 
+    function animateText(element) {
+        const split = new SplitText(element, { type: 'chars' });
+        gsap.timeline().from(split.chars, { duration: 0.02, autoAlpha: 0, stagger: { each: 0.02 } });
+    }
+
+    // Display movie description
+    function displayMovieDescription(movie) {
+        const descriptionBox = document.querySelector("#movie-description-box");
+        descriptionBox.innerHTML = "";
+
+        const titleHeader = document.createElement("h2");
+        titleHeader.textContent = movie.title;
+        descriptionBox.appendChild(titleHeader);
+
+        const descriptionParagraph = document.createElement("p");
+        descriptionParagraph.textContent = movie.opening_crawl;
+        descriptionBox.appendChild(descriptionParagraph);
+
+        const tl = animateText(descriptionParagraph);
+
+        descriptionBox.classList.add("active");
+
+        setTimeout(() => {
+            descriptionBox.classList.remove("active");
+
+            tl.kill();
+        }, tl.duration() * 10000);
+    }
+
+    getpage1();
 })();
