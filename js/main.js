@@ -2,7 +2,7 @@
     gsap.registerPlugin(SplitText, ScrambleTextPlugin);
     const baseUrl = `https://swapi.dev/api/`;
     const characters = [];
-    const characterList = document.querySelector("#character-con");
+    const characterList = document.querySelector("#character-list");
     const characterDetailsContainer = document.querySelector("#character-details");
     const spinner = document.querySelector("#spinner");
 
@@ -26,7 +26,7 @@
             const a = document.createElement("a");
             a.textContent = character.name;
 
-            a.addEventListener("click", () => {
+            li.addEventListener("click", () => {
                 displayCharacterDetails(character);
             });
 
@@ -111,8 +111,9 @@
     }
 
     function animateText(element) {
-        const split = new SplitText(element, { type: 'chars' });
-        gsap.timeline().from(split.chars, { duration: 0.02, autoAlpha: 0, stagger: { each: 0.02 } });
+        const split = new SplitText(element, { type: 'words,chars' });
+        gsap.timeline().from(split.words, { duration: 0.01, autoAlpha: 0, stagger: { each: 0.01 } });
+        gsap.timeline().from(split.chars, { duration: 0.01, autoAlpha: 0, stagger: { each: 0.01 } });
     }
 
     // Display movie description
@@ -131,13 +132,9 @@
         const tl = animateText(descriptionParagraph);
 
         descriptionBox.classList.add("active");
+        descriptionBox.classList.remove("hidden")
 
-        setTimeout(() => {
-            descriptionBox.classList.remove("active");
-
-            tl.kill();
-        }, tl.duration() * 10000);
-    }
+     }
 
     getpage1();
 })();
