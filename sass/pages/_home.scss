@@ -49,7 +49,26 @@ body {
     right: 0px;
     width: 40%;
   }
-
+  
+  #movie-description-box.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .myText {
+    font-size: 36px;
+    animation: glow 10s infinite alternate; 
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px white;
+    }
+    to {
+      text-shadow: 0 0 30px white;
+    }
+  }
+  
 .hidden {
     display: none;
 }
