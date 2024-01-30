@@ -10,6 +10,15 @@ body {
     
 }
 
+/* character container */
+
+#character-con {
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    z-index: 100;
+  }
+
 /* Poster Animations and sizeing things */
 
 .movie-details {

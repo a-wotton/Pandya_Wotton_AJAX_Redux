@@ -9,6 +9,14 @@ body {
   background-blend-mode: multiply;
 }
 
+/* character container */
+#character-con {
+  position: fixed;
+  top: 0;
+  padding: 10px;
+  z-index: 100;
+}
+
 /* Poster Animations and sizeing things */
 .movie-details {
   margin: 10px;
@@ -30,6 +38,27 @@ body {
 .movie-details img:hover {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(0, 0, 0, 0.8);
 }
+
+/* movie description */
+#movie-description-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#movie-description-box.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 
 .hidden {
   display: none;
