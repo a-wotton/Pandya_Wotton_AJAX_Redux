@@ -6,6 +6,9 @@
     const characterDetailsContainer = document.querySelector("#character-details");
     const spinner = document.querySelector("#spinner");
 
+    
+    const characterListTemplate = document.querySelector("#character-list-template");
+
     function getpage1() {
         fetch(`${baseUrl}people/`)
             .then(response => response.json())
@@ -20,20 +23,24 @@
     }
 
     function displayCharacters() {
-        const ul = document.createElement("ul");
+        const clone = document.importNode(characterListTemplate.content, true);
+        const ul = clone.querySelector("ul");
+
         characters.forEach(character => {
             const li = document.createElement("li");
             const a = document.createElement("a");
             a.textContent = character.name;
 
-            li.addEventListener("click", () => {
+            a.addEventListener("click", () => {
                 displayCharacterDetails(character);
             });
 
             li.appendChild(a);
             ul.appendChild(li);
         });
-        characterList.appendChild(ul);
+
+        characterList.innerHTML = "";
+        characterList.appendChild(clone);
         spinner.classList.add("hidden");
     }
 
@@ -94,7 +101,6 @@
         characterDetailsContainer.appendChild(characterInfoDiv);
     }
 
-    // Split text and scramble animation for headers
     const myTextHeaders = document.querySelectorAll(".myText");
 
     myTextHeaders.forEach(header => {
@@ -111,12 +117,10 @@
     }
 
     function animateText(element) {
-        const split = new SplitText(element, { type: 'words,chars' });
-        gsap.timeline().from(split.words, { duration: 0.01, autoAlpha: 0, stagger: { each: 0.01 } });
-        gsap.timeline().from(split.chars, { duration: 0.01, autoAlpha: 0, stagger: { each: 0.01 } });
+        const split = new SplitText(element, { type: 'chars' });
+        gsap.timeline().from(split.chars, { duration: 0.02, autoAlpha: 0, stagger: { each: 0.02 } });
     }
 
-    // Display movie description
     function displayMovieDescription(movie) {
         const descriptionBox = document.querySelector("#movie-description-box");
         descriptionBox.innerHTML = "";
@@ -132,9 +136,13 @@
         const tl = animateText(descriptionParagraph);
 
         descriptionBox.classList.add("active");
-        descriptionBox.classList.remove("hidden")
 
-     }
+        setTimeout(() => {
+            descriptionBox.classList.remove("active");
+
+            tl.kill();
+        }, tl.duration() * 10000);
+    }
 
     getpage1();
 })();
