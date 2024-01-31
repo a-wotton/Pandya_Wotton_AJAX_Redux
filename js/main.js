@@ -1,5 +1,6 @@
 (() => {
     gsap.registerPlugin(SplitText, ScrambleTextPlugin);
+    const descriptionBox = document.querySelector("#movie-description-box");
     const baseUrl = `https://swapi.dev/api/`;
     const characters = [];
     const characterList = document.querySelector("#character-list");
@@ -26,7 +27,7 @@
             const a = document.createElement("a");
             a.textContent = character.name;
 
-            li.addEventListener("click", () => {
+            li.addEventListener("click", function() {
                 displayCharacterDetails(character);
             });
 
@@ -38,6 +39,7 @@
     }
 
     function displayCharacterDetails(character) {
+        descriptionBox.innerHTML = "";
         const characterInfoDiv = document.createElement("div");
         characterInfoDiv.classList.add("character-info");
 
@@ -118,7 +120,6 @@
 
     
     function displayMovieDescription(movie) {
-        const descriptionBox = document.querySelector("#movie-description-box");
         descriptionBox.innerHTML = "";
 
         const titleHeader = document.createElement("h2");
